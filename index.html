@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fff4f8">
+<title>A Gift For My Love ♡</title>
+<style>
+:root{
+  --pink:#e96f9a;--deep:#b94f78;--pale:#fff4f8;--line:#edc7d5;
+  --ink:#55444d;--muted:#9b7e8b;--white:#fffafd;--shadow:0 18px 50px #bd79951c;
+  --page1:#fff7fa;--page2:#ffedf4;--card:#fffafd;--soft:#fff3f8;--memory:#fff;
+}
+body.dark{
+  --pale:#211923;--line:#75465d;--ink:#f7e8ef;--muted:#d1aaba;--white:#302331;
+  --page1:#211923;--page2:#352332;--card:#302331;--soft:#493044;--memory:#3b2b3a;
+  --shadow:0 18px 50px #09050b66;
+}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--pale)}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,-apple-system,sans-serif;
+ background:radial-gradient(ellipse at 20% 10%,var(--card) 0,transparent 35%),linear-gradient(150deg,var(--page1),var(--page2) 60%,var(--pale));transition:background .25s,color .25s;
+ display:flex;align-items:center;justify-content:center;padding:22px 14px 34px;overflow-x:hidden}
+body:before,body:after{content:"♡";position:fixed;color:#f2c6d6;font-size:42px;opacity:.5;pointer-events:none}
+body:before{top:7%;left:6%;transform:rotate(-18deg)}body:after{right:7%;bottom:9%;font-size:34px;transform:rotate(15deg)}
+.wrap{width:min(100%,520px);position:relative;z-index:1}
+.topline{text-align:center;font-size:13px;letter-spacing:.12em;color:#bd879b;margin:0 0 13px;text-transform:uppercase}
+.card{background:color-mix(in srgb,var(--card) 92%,transparent);border:2px dashed var(--line);border-radius:34px;padding:clamp(25px,6vw,42px) clamp(20px,6vw,38px);box-shadow:var(--shadow);text-align:center;min-height:620px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;inset:9px;border:1px solid #f8e3eb;border-radius:27px;pointer-events:none}
+.kitty{width:142px;height:142px;display:grid;place-items:center;margin:0 auto 18px;background:var(--soft);border-radius:28px;box-shadow:0 9px 28px #d987a51c}
+.kitty svg{width:118px;height:118px}
+.eyebrow{font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:#b68a9a;margin:4px 0 12px}
+h1{font-size:clamp(38px,10vw,58px);line-height:1.04;margin:0;color:#66505b;font-weight:500;font-style:italic}
+h1 span{display:block;color:var(--pink);font-size:1.2em;font-weight:700;margin-top:7px}
+.sub{font-size:17px;line-height:1.7;color:#967d88;margin:23px 0 28px;max-width:350px}
+.btn{appearance:none;border:0;border-radius:999px;padding:16px 28px;min-width:220px;font:600 14px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:transform .18s,box-shadow .18s,background .18s}
+.btn:active{transform:scale(.97)}
+.primary{background:linear-gradient(135deg,#f49ab8,#e76f99);color:white;box-shadow:0 9px 20px #e47a9a42}
+.primary:hover{box-shadow:0 12px 26px #e47a9a55;transform:translateY(-2px)}
+.secondary{background:var(--card);border:2px solid #d77e9d;color:#b56b87;margin-top:14px}
+.buttons{display:flex;flex-direction:column;align-items:center;width:100%}
+.hidden{display:none!important}
+.lockicon{font-size:54px;line-height:1;margin-bottom:17px}
+.script{font-family:"Brush Script MT","Segoe Script",cursive;font-size:clamp(31px,8vw,43px);font-style:italic;color:var(--deep);margin:0 0 6px}
+.digits{display:flex;justify-content:center;gap:9px;margin:25px 0 18px}
+.digit{width:58px;height:68px;border:2px solid #d78ca5;border-radius:17px;background:var(--card);display:grid;place-items:center;font-size:30px;color:var(--deep);box-shadow:0 5px 14px #d58aa01a}
+.digit.filled{background:#fff3f7}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;width:min(100%,290px);margin:0 auto}
+.key{border:0;border-radius:15px;background:var(--soft);color:var(--ink);padding:15px 5px;font-size:22px;font-weight:650;cursor:pointer;box-shadow:0 3px 0 #eccbd8}
+.key:active{transform:translateY(2px);box-shadow:none}
+.key small{display:block;font-size:9px;letter-spacing:.15em;margin-top:2px}
+.key.action{font-size:16px;background:var(--soft)}
+.error{height:22px;color:#c14f75;font-size:13px;margin:12px 0 0}
+.note{font-size:12px;color:#b69aa6;margin-top:17px}
+.letter{font-size:17px;line-height:1.95;text-align:center;color:#795f6c;white-space:pre-line;max-width:390px;margin:14px auto 22px}
+.signature{font-family:"Brush Script MT","Segoe Script",cursive;font-size:30px;color:var(--deep);margin-top:8px}
+.memory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%;margin:16px 0}
+.memory{background:var(--memory);border:1px solid var(--line);border-radius:14px;padding:9px 9px 14px;box-shadow:0 6px 18px #c58a9a15;transform:rotate(-2deg)}
+.memory:nth-child(2){transform:rotate(2deg)}.memory:nth-child(3){transform:rotate(1deg)}.memory:nth-child(4){transform:rotate(-1deg)}
+.memory-art{height:100px;border-radius:9px;background:linear-gradient(140deg,#fff0f5,#f9dce8);display:grid;place-items:center;font-size:42px}
+.memory p{font-size:12px;color:var(--muted);margin:9px 0 0}\n.memory{cursor:pointer;transition:transform .18s,box-shadow .18s}.memory:active{transform:scale(.97)}
+.theme-toggle{position:fixed;left:18px;bottom:18px;border:1px solid #d98aa6;background:var(--card);color:var(--pink);width:54px;height:54px;border-radius:50%;font-size:21px;box-shadow:0 6px 20px #b66c8a24;cursor:pointer;z-index:3}\n.modal{position:fixed;inset:0;background:#1b101dcc;display:grid;place-items:center;padding:22px;z-index:10}\n.modal-box{width:min(100%,360px);background:var(--card);border:2px dashed var(--line);border-radius:25px;padding:28px 22px;text-align:center;box-shadow:var(--shadow);color:var(--ink)}\n.modal-box .msg{font-size:17px;line-height:1.8;color:var(--muted);white-space:pre-line;margin:14px 0 22px}\n.music{position:fixed;right:18px;bottom:18px;border:1px solid #d98aa6;background:#fff9fc;color:#b85d80;width:54px;height:54px;border-radius:50%;font-size:23px;box-shadow:0 6px 20px #b66c8a24;cursor:pointer;z-index:3}
+.footer{text-align:center;font-size:11px;color:#c09aa9;margin:13px 0 0}
+.sparkle{color:#e88cac}
+@media(max-width:390px){.card{min-height:590px;padding:25px 17px}.digit{width:52px;height:62px}.btn{min-width:205px}}
+@media(prefers-reduced-motion:no-preference){.card{animation:appear .55s ease both}.kitty{animation:bob 3s ease-in-out infinite}@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}@keyframes bob{50%{transform:translateY(-5px)}}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="topline">a little surprise made with love <span class="sparkle">♡</span></p>
+  <section class="card" id="welcome">
+    <div class="kitty" aria-label="Cute kitten illustration">
+      <svg viewBox="0 0 160 160" role="img" aria-label="Cute kitten with a pink bow">
+        <path d="M34 58 39 22 Q42 10 54 22 L69 37 Q80 33 91 37 L108 21 Q120 10 123 24 L127 60 Q137 75 132 103 Q125 137 81 140 Q37 138 28 105 Q22 79 34 58Z" fill="#fff" stroke="#a98791" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M51 83q8 9 16 0M93 83q8 9 16 0" fill="none" stroke="#9b7c87" stroke-width="4" stroke-linecap="round"/>
+        <path d="M77 94q4-5 8 0q-4 8-8 0" fill="#e77b9e"/>
+        <path d="M80 102q-7 10-15 3M80 102q7 10 15 3" fill="none" stroke="#a98791" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M35 91 13 85M35 100 12 102M125 91l22-6M125 101l23 2" stroke="#b798a2" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M100 34q-19-18-23 0q-2 13 16 17q-15 9-5 18q13 9 23-9q20 1 19-12q-2-13-18-8q2-15-12-16Z" fill="#f49cba" stroke="#c66e8e" stroke-width="3"/>
+        <circle cx="99" cy="47" r="4" fill="#fff0f5"/>
+        <path d="M53 119q27 12 55-1l-4 20H58Z" fill="#f5b3ca" stroke="#c9839d" stroke-width="3"/>
+        <path d="M67 119q-5 13 1 19M93 119q5 13-1 19" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <p class="eyebrow">a gift for my favorite person</p>
+    <h1>Hello <span>My Love!</span></h1>
+    <p class="sub">I made a little something just for you. Would you like to open your gift? ♡</p>
+    <div class="buttons">
+      <button class="btn primary" id="yes">Yes please</button>
+      <button class="btn secondary" id="no">No thanks</button>
+    </div>
+  </section>
+
+  <section class="card hidden" id="lock">
+    <div class="lockicon">🔒</div>
+    <p class="script">a little secret...</p>
+    <p class="sub" style="margin:8px 0 0">Enter our special date</p>
+    <p style="font-size:14px;color:#ad8d9b;margin:5px 0 0">a date only we know ♡</p>
+    <div class="digits" id="digits" aria-label="4 digit secret code">
+      <div class="digit"></div><div class="digit"></div><div class="digit"></div><div class="digit"></div>
+    </div>
+    <div class="keypad" id="keypad">
+      <button class="key" data-num="1">1</button><button class="key" data-num="2">2<small>ABC</small></button><button class="key" data-num="3">3<small>DEF</small></button>
+      <button class="key" data-num="4">4<small>GHI</small></button><button class="key" data-num="5">5<small>JKL</small></button><button class="key" data-num="6">6<small>MNO</small></button>
+      <button class="key" data-num="7">7<small>PQRS</small></button><button class="key" data-num="8">8<small>TUV</small></button><button class="key" data-num="9">9<small>WXYZ</small></button>
+      <button class="key action" id="clear">Clear</button><button class="key" data-num="0">0</button><button class="key action" id="back">⌫</button>
+    </div>
+    <p class="error" id="error" aria-live="polite"></p>
+    <p class="note">A tiny secret between us <span class="sparkle">♡</span></p>
+  </section>
+
+  <section class="card hidden" id="gift">
+    <div class="kitty" style="width:112px;height:112px;margin-bottom:10px">
+      <svg viewBox="0 0 160 160" aria-hidden="true">
+        <path d="M34 58 39 22 Q42 10 54 22 L69 37 Q80 33 91 37 L108 21 Q120 10 123 24 L127 60 Q137 75 132 103 Q125 137 81 140 Q37 138 28 105 Q22 79 34 58Z" fill="#fff" stroke="#a98791" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M51 83q8 9 16 0M93 83q8 9 16 0" fill="none" stroke="#9b7c87" stroke-width="4" stroke-linecap="round"/>
+        <path d="M77 94q4-5 8 0q-4 8-8 0" fill="#e77b9e"/>
+        <path d="M80 102q-7 10-15 3M80 102q7 10 15 3" fill="none" stroke="#a98791" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M100 34q-19-18-23 0q-2 13 16 17q-15 9-5 18q13 9 23-9q20 1 19-12q-2-13-18-8q2-15-12-16Z" fill="#f49cba" stroke="#c66e8e" stroke-width="3"/>
+        <circle cx="99" cy="47" r="4" fill="#fff0f5"/>
+      </svg>
+    </div>
+    <p class="script">you opened it!</p>
+    <h1 style="font-size:38px">To my favorite <span style="font-size:1.15em">person ♡</span></h1>
+    <p class="letter" id="letter">وجودك في حياتي من أجمل الحاجات اللي حصلتلي
+كل يوم معاكي ليه معنى مختلف وذكرى حلوة
+يمكن الهدية دي بسيطة لكن اللي جوايا ليكي أكبر من أي كلام
+بحب ضحكتك وتفاصيلك وكل حاجة بتخليكي إنتي
+ويا رب أفضل دايمًا سبب في ابتسامتك ❤️</p>
+    <div class="memory-grid">
+      <button class="memory" data-title="كل لحظة معاكي حلوة" data-message="حتى أبسط وقت بقضيه معاكي بيبقى من أحلى أوقاتي. وجودك بيخلّي اليوم العادي ذكرى حلوة. ♡"><div class="memory-art">🌷</div><p>كل لحظة معاكي حلوة</p></button>
+      <button class="memory" data-title="رسالة صغيرة ليكي" data-message="يمكن مش بعرف أقول كل اللي جوايا كل مرة، بس إنتي غالية عندي أكتر مما تتخيلي. بحبك وبحب وجودك في حياتي. 💌"><div class="memory-art">💌</div><p>رسالة صغيرة ليكي</p></button>
+      <button class="memory" data-title="أحلى تفاصيل" data-message="ضحكتك، كلامك، طريقتك، وحتى التفاصيل الصغيرة اللي يمكن متاخديش بالك منها... كلها حاجات بحبها فيكي. 🧸"><div class="memory-art">🧸</div><p>أحلى تفاصيل</p></button>
+      <button class="memory" data-title="ذكريات لسه جاية" data-message="لسه قدامنا أيام كتير وحكايات وذكريات حلوة نفسي نعيشها سوا. وإن شاء الله اللي جاي يكون أجمل بينا. ✨"><div class="memory-art">✨</div><p>ذكريات لسه جاية</p></button>
+    </div>
+    <p class="signature">Forever yours ♡</p>
+    <button class="btn secondary" id="again" style="min-width:190px;margin-top:17px">Back to the beginning</button>
+  </section>
+  <p class="footer">made with love, just for you ♡</p>
+</main>
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="تغيير الوضع">☾</button>
+<div class="modal hidden" id="memoryModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <div style="font-size:35px">♡</div>
+    <h2 id="modalTitle" class="script">رسالة ليكي</h2>
+    <p class="msg" id="modalMessage"></p>
+    <button class="btn primary" id="closeModal" style="min-width:150px">Close ♡</button>
+  </div>
+</div>
+<button class="music" id="music" aria-label="Toggle gentle music" title="Toggle music">♫</button>
+<script>
+/* PERSONALIZE HERE:
+   secretCode: the 4 digits of your special date (example: 1402)
+   letter: replace the Arabic message with your own words if you like.
+*/
+const CONFIG = {
+  secretCode: "1609",
+  letter: "وجودك في حياتي من أجمل الحاجات اللي حصلتلي\nكل يوم معاكي ليه معنى مختلف وذكرى حلوة\nيمكن الهدية دي بسيطة لكن اللي جوايا ليكي أكبر من أي كلام\nبحب ضحكتك وتفاصيلك وكل حاجة بتخليكي إنتي\nويا رب أفضل دايمًا سبب في ابتسامتك ❤️"
+};
+document.getElementById("letter").textContent = CONFIG.letter;
+const sections = ["welcome","lock","gift"];
+function show(id){sections.forEach(s=>document.getElementById(s).classList.toggle("hidden",s!==id));}
+document.getElementById("yes").addEventListener("click",()=>show("lock"));
+document.getElementById("no").addEventListener("click",()=>{
+  const b=document.getElementById("no");
+  b.textContent="Are you sure? 🥺";
+  setTimeout(()=>b.textContent="No thanks",1300);
+});
+document.getElementById("again").addEventListener("click",()=>{code="";render();show("welcome");});
+let code="";
+const boxes=[...document.querySelectorAll(".digit")];
+function render(){boxes.forEach((b,i)=>{b.textContent=code[i]||"";b.classList.toggle("filled",!!code[i]);});}
+function submit(){if(code.length!==4)return;
+  if(code===CONFIG.secretCode){document.getElementById("error").textContent="";show("gift");}
+  else{document.getElementById("error").textContent="Not quite... try our special date again ♡";code="";render();}
+}
+document.querySelectorAll("[data-num]").forEach(b=>b.addEventListener("click",()=>{if(code.length<4){code+=b.dataset.num;render();if(code.length===4)setTimeout(submit,180);}}));
+document.getElementById("clear").addEventListener("click",()=>{code="";render();document.getElementById("error").textContent="";});
+document.getElementById("back").addEventListener("click",()=>{code=code.slice(0,-1);render();});
+document.addEventListener("keydown",e=>{if(/^\d$/.test(e.key)&&!document.getElementById("lock").classList.contains("hidden")){if(code.length<4){code+=e.key;render();if(code.length===4)setTimeout(submit,180);}}if(e.key==="Backspace"){code=code.slice(0,-1);render();}});
+// Each memory tile opens its own little note.
+const memoryModal=document.getElementById("memoryModal");
+document.querySelectorAll(".memory").forEach(tile=>tile.addEventListener("click",()=>{
+  document.getElementById("modalTitle").textContent=tile.dataset.title;
+  document.getElementById("modalMessage").textContent=tile.dataset.message;
+  memoryModal.classList.remove("hidden");
+}));
+function closeMemoryModal(){memoryModal.classList.add("hidden");}
+document.getElementById("closeModal").addEventListener("click",closeMemoryModal);
+memoryModal.addEventListener("click",e=>{if(e.target===memoryModal)closeMemoryModal();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMemoryModal();});
+
+// Pink dark mode toggle; preference stays saved on this device.
+const themeToggle=document.getElementById("themeToggle");
+if(localStorage.getItem("love-theme")==="dark"){document.body.classList.add("dark");themeToggle.textContent="☀";}
+themeToggle.addEventListener("click",()=>{
+  const dark=document.body.classList.toggle("dark");
+  localStorage.setItem("love-theme",dark?"dark":"light");
+  themeToggle.textContent=dark?"☀":"☾";
+});
+
+/* Gentle original tone sequence using Web Audio; starts only after the visitor taps the music button. */
+let audioCtx=null, musicOn=false, timer=null, noteIndex=0;
+const notes=[523.25,659.25,783.99,659.25,587.33,698.46,783.99,698.46];
+function playNote(){
+  if(!musicOn||!audioCtx)return;
+  const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
+  osc.type="sine";osc.frequency.value=notes[noteIndex++%notes.length];
+  gain.gain.setValueAtTime(.0001,audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.055,audioCtx.currentTime+.03);
+  gain.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+.32);
+  osc.connect(gain);gain.connect(audioCtx.destination);osc.start();osc.stop(audioCtx.currentTime+.34);
+}
+document.getElementById("music").addEventListener("click",async()=>{
+  if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==="suspended")await audioCtx.resume();
+  musicOn=!musicOn;document.getElementById("music").textContent=musicOn?"Ⅱ":"♫";
+  if(musicOn){playNote();timer=setInterval(playNote,390);}else{clearInterval(timer);}
+});
+</script>
+</body>
+</html>
