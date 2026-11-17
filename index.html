@@ -55,10 +55,10 @@ h1 span{display:block;color:var(--pink);font-size:1.2em;font-weight:700;margin-t
 .letter{font-size:17px;line-height:1.95;text-align:center;color:#795f6c;white-space:pre-line;max-width:390px;margin:14px auto 22px}
 .signature{font-family:"Brush Script MT","Segoe Script",cursive;font-size:30px;color:var(--deep);margin-top:8px}
 .memory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%;margin:16px 0}
-.memory{background:var(--memory);border:1px solid var(--line);border-radius:14px;padding:9px 9px 14px;box-shadow:0 6px 18px #c58a9a15;transform:rotate(-2deg)}
-.memory:nth-child(2){transform:rotate(2deg)}.memory:nth-child(3){transform:rotate(1deg)}.memory:nth-child(4){transform:rotate(-1deg)}
+.memory{background:var(--memory);border:1px solid var(--line);border-radius:14px;padding:9px 9px 14px;box-shadow:0 6px 18px #c58a9a15;transform:none;text-align:center;width:100%;font:inherit;}
+
 .memory-art{height:100px;border-radius:9px;background:linear-gradient(140deg,#fff0f5,#f9dce8);display:grid;place-items:center;font-size:42px}
-.memory p{font-size:12px;color:var(--muted);margin:9px 0 0}\n.memory{cursor:pointer;transition:transform .18s,box-shadow .18s}.memory:active{transform:scale(.97)}
+.memory p{font-size:12px;color:var(--muted);margin:9px 0 0}\n.memory{cursor:pointer;transition:box-shadow .18s}.memory:active{transform:none;box-shadow:0 3px 12px #c58a9a22}
 .theme-toggle{position:fixed;left:18px;bottom:18px;border:1px solid #d98aa6;background:var(--card);color:var(--pink);width:54px;height:54px;border-radius:50%;font-size:21px;box-shadow:0 6px 20px #b66c8a24;cursor:pointer;z-index:3}\n.modal{position:fixed;inset:0;background:#1b101dcc;display:grid;place-items:center;padding:22px;z-index:10}\n.modal-box{width:min(100%,360px);background:var(--card);border:2px dashed var(--line);border-radius:25px;padding:28px 22px;text-align:center;box-shadow:var(--shadow);color:var(--ink)}\n.modal-box .msg{font-size:17px;line-height:1.8;color:var(--muted);white-space:pre-line;margin:14px 0 22px}\n.music{position:fixed;right:18px;bottom:18px;border:1px solid #d98aa6;background:#fff9fc;color:#b85d80;width:54px;height:54px;border-radius:50%;font-size:23px;box-shadow:0 6px 20px #b66c8a24;cursor:pointer;z-index:3}
 .footer{text-align:center;font-size:11px;color:#c09aa9;margin:13px 0 0}
 .sparkle{color:#e88cac}
@@ -137,17 +137,16 @@ h1 span{display:block;color:var(--pink);font-size:1.2em;font-weight:700;margin-t
     <p class="signature">Forever yours ♡</p>
     <button class="btn secondary" id="again" style="min-width:190px;margin-top:17px">Back to the beginning</button>
   </section>
+  <section class="card hidden" id="memoryDetail">
+    <div class="kitty" style="width:112px;height:112px;margin-bottom:10px"><div id="detailIcon" style="font-size:58px">💌</div></div>
+    <p class="script">a little note for you</p>
+    <h1 id="detailTitle" style="font-size:clamp(30px,8vw,42px);line-height:1.2"></h1>
+    <p class="letter" id="detailMessage" style="max-width:390px"></p>
+    <button class="btn secondary" id="backToMemories" style="min-width:190px;margin-top:17px">Back to memories ♡</button>
+  </section>
   <p class="footer">made with love, just for you ♡</p>
 </main>
 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="تغيير الوضع">☾</button>
-<div class="modal hidden" id="memoryModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-box">
-    <div style="font-size:35px">♡</div>
-    <h2 id="modalTitle" class="script">رسالة ليكي</h2>
-    <p class="msg" id="modalMessage"></p>
-    <button class="btn primary" id="closeModal" style="min-width:150px">Close ♡</button>
-  </div>
-</div>
 <button class="music" id="music" aria-label="Toggle gentle music" title="Toggle music">♫</button>
 <script>
 /* PERSONALIZE HERE:
@@ -179,17 +178,20 @@ document.querySelectorAll("[data-num]").forEach(b=>b.addEventListener("click",()
 document.getElementById("clear").addEventListener("click",()=>{code="";render();document.getElementById("error").textContent="";});
 document.getElementById("back").addEventListener("click",()=>{code=code.slice(0,-1);render();});
 document.addEventListener("keydown",e=>{if(/^\d$/.test(e.key)&&!document.getElementById("lock").classList.contains("hidden")){if(code.length<4){code+=e.key;render();if(code.length===4)setTimeout(submit,180);}}if(e.key==="Backspace"){code=code.slice(0,-1);render();}});
-// Each memory tile opens its own little note.
-const memoryModal=document.getElementById("memoryModal");
+// Each memory tile opens a normal full-page view inside the site.
 document.querySelectorAll(".memory").forEach(tile=>tile.addEventListener("click",()=>{
-  document.getElementById("modalTitle").textContent=tile.dataset.title;
-  document.getElementById("modalMessage").textContent=tile.dataset.message;
-  memoryModal.classList.remove("hidden");
+  document.getElementById("detailTitle").textContent=tile.dataset.title;
+  document.getElementById("detailMessage").textContent=tile.dataset.message;
+  document.getElementById("detailIcon").textContent=tile.querySelector(".memory-art").textContent.trim();
+  document.getElementById("gift").classList.add("hidden");
+  document.getElementById("memoryDetail").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
 }));
-function closeMemoryModal(){memoryModal.classList.add("hidden");}
-document.getElementById("closeModal").addEventListener("click",closeMemoryModal);
-memoryModal.addEventListener("click",e=>{if(e.target===memoryModal)closeMemoryModal();});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMemoryModal();});
+document.getElementById("backToMemories").addEventListener("click",()=>{
+  document.getElementById("memoryDetail").classList.add("hidden");
+  document.getElementById("gift").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+});
 
 // Pink dark mode toggle; preference stays saved on this device.
 const themeToggle=document.getElementById("themeToggle");
